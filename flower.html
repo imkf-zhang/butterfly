@@ -42,12 +42,13 @@
             </div>
           </div>
         </div>
-        <img  style="width: 100px;height: 100px; margin-left: 5px;"
+        <div  @click="item.checked = !item.checked" class="check-container" style="width: 100px;height:100px;display: inline-block; margin-left: 5px;" slot="reference">
+          <img  style="width: 100px;height: 100px;"
               :src="'./assects/flower/'+handleImgUrl(item.title)+'.jpeg'"
               :title="item.title"
-              @click="handleAddGarden(item)"
-              slot="reference"
             />
+            <div :class="item.checked? 'active' : ''"></div>
+        </div>
         </el-popover>
         </div>
         <div class="garden-container">
@@ -57,7 +58,7 @@
               <p class="title">Your garden will attract thess butterflies:</p>
             </div>
             <div class="butterfy-item">
-                <div class="item-container" v-for="i in detail.butterfly" :key="i">
+                <div class="item-container" v-for="i in detail" :key="i">
                   <img
                     :src="'./assects/butterfly/'+handleImgUrl(i)+'.jpeg'"
                     alt=""
@@ -67,6 +68,7 @@
             </div>
             <div class="btn" @click="reset">Try again</div>
           </div>
+          <div class="btn-finish" v-show="isFinish" @click="handleAddGarden">Finish</div>
         </div>
       </div>
     </div>
@@ -80,11 +82,21 @@
           return {
             isMask: false,
             relation,
-            detail:{
-              title: '',
-              describe: '',
-              butterfly: []
+            detail:[],
+            isFinish:false
+          }
+        },
+        watch: {
+          relation: {
+            handler: function(val) {
+              if(val.some(item => item.checked)) {
+                this.isFinish = true
+              }else {
+                this.isFinish = false
+              }
             },
+            deep:true,
+            immediate: true
           }
         },
         methods: {
@@ -99,12 +111,23 @@
               return items.split(' ').join('_')
             }
           },
-          handleAddGarden(item) {
-           this.detail = item;
-           this.isMask = true
-          },
           reset() {
             this.isMask = false
+            this.isFinish = true
+            this.relation.forEach(item => {
+              item.checked = false
+            })
+          },
+          handleAddGarden() {
+            let arr = []
+            this.relation.forEach(item => {
+              if(item.checked) {
+                arr.push(...item.butterfly)
+              }
+            })
+            this.detail = Array.from( new Set(arr))
+            this.isMask = true
+            this.isFinish = false
           }
         }
       })
