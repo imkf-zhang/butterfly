@@ -1,0 +1,126 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+}
+div {
+  box-sizing: border-box;
+}
+h2,
+p {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+#app {
+  width: 60%;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+  background-color: rgba(188, 178, 176, 0.15);
+}
+#app .describe-container {
+  margin-top: 15px;
+}
+#app .describe-container p {
+  margin-top: 5px;
+  font-weight: 700;
+}
+#app .content-container {
+  width: 95%;
+  height: 650px;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: 1px solid transparent;
+}
+#app .content-container .flower-container {
+  width: 100%;
+  height: 130px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+#app .content-container .flower-container::-webkit-scrollbar {
+  width: 4px;
+}
+#app .content-container .flower-container::-webkit-scrollbar-track {
+  background: #efefef;
+  border-radius: 2px;
+}
+#app .content-container .flower-container::-webkit-scrollbar-thumb {
+  background: #40a0ff49;
+  border-radius: 20px;
+}
+#app .content-container .flower-container .flower-item {
+  width: 100px;
+  height: 100px;
+  margin-left: 5px;
+  position: relative;
+  display: inline-block;
+}
+#app .content-container .flower-container .flower-item img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+#app .content-container .garden-container {
+  width: 80%;
+  height: 490px;
+  margin: 0 auto;
+  margin-top: 25px;
+  background-image: url('../assects//garden/garden.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+#app .content-container .garden-container .mask {
+  width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  background-color: rgba(241, 235, 235, 0.6);
+}
+#app .content-container .garden-container .mask .title {
+  font-family: 'Courier New', Courier, monospace;
+  font-style: oblique;
+  font-weight: 800;
+  font-size: 20px;
+  color: #a90505;
+}
+#app .content-container .garden-container .mask .butterfy-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 50px;
+  border-radius: 65px;
+  background-color: #fff;
+}
+#app .content-container .garden-container .mask .butterfy-item .item-container {
+  text-align: center;
+  cursor: pointer;
+}
+#app .content-container .garden-container .mask .butterfy-item .item-container img {
+  width: 55px;
+  height: 55px;
+}
+#app .content-container .garden-container .mask .butterfy-item .item-container p {
+  margin-top: 5px;
+  font-family: monospace;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#app .content-container .garden-container .mask .btn {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 20px;
+  background-color: #f60;
+  cursor: pointer;
+}

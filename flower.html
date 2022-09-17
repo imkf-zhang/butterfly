@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flower</title>
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./libs/element-ui/element-ui-2.4.8.min.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 文案 -->
+      <h2>Build a butterfly shelter darden</h2>
+      <div class="describe-container">
+        <p>Want your garden to attract butterflies?</p>
+        <p>
+          Choose plants for your garden and see which butterflies you can
+          attract
+        </p>
+        <p>Click your favorite plants into the Garden, then click Finsh!</p>
+      </div>
+      <div class="content-container">
+        <!-- 花 -->
+        <div class="flower-container">
+          <el-popover
+          placement="top-start"
+          trigger="hover"
+          v-for="item in relation"
+          :key="item.title"
+        >
+         <!-- 详情 -->
+         <div style="width: 240px;">
+          <p style="font-size: 13px;">{{item.describe}}</p>
+          <div style="display: flex;justify-content: space-around;">
+            <div style="width: 50%; height: 80px; text-align: center;" v-for="i in item.butterfly" :key="i">
+              <img style="width: 50%; height:50px"
+                :src="'./assects/butterfly/'+handleImgUrl(i)+'.jpeg'"
+                alt=""
+              />
+              <p style=" margin-top: 5px;white-space: nowrap;  overflow: hidden;text-overflow: ellipsis;" :title="i">{{i}}</p>
+            </div>
+          </div>
+        </div>
+        <img  style="width: 100px;height: 100px; margin-left: 5px;"
+              :src="'./assects/flower/'+handleImgUrl(item.title)+'.jpeg'"
+              :title="item.title"
+              @click="handleAddGarden(item)"
+              slot="reference"
+            />
+        </el-popover>
+        </div>
+        <div class="garden-container">
+          <div class="mask" v-show="isMask">
+            <div style="margin-top: 90px;">
+              <p class="title">Congratulations!</p>
+              <p class="title">Your garden will attract thess butterflies:</p>
+            </div>
+            <div class="butterfy-item">
+                <div class="item-container" v-for="i in detail.butterfly" :key="i">
+                  <img
+                    :src="'./assects/butterfly/'+handleImgUrl(i)+'.jpeg'"
+                    alt=""
+                  />
+                  <p :title="i">{{i}}</p>
+                </div>
+            </div>
+            <div class="btn" @click="reset">Try again</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./relation/index.js"></script>
+    <script src="./libs/vue/vue-2.5.17.min.js"></script>
+    <script src="./libs/element-ui/element-ui-2.4.8.min.js"></script>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data() {
+          return {
+            isMask: false,
+            relation,
+            detail:{
+              title: '',
+              describe: '',
+              butterfly: []
+            },
+          }
+        },
+        methods: {
+          handleImgUrl(items) {
+            if (Array.isArray(items)) {
+              let arr = []
+              items.forEach((i) => {
+                arr.push(i.split(' ').join('_'))
+              })
+              return arr
+            } else {
+              return items.split(' ').join('_')
+            }
+          },
+          handleAddGarden(item) {
+           this.detail = item;
+           this.isMask = true
+          },
+          reset() {
+            this.isMask = false
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
